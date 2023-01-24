@@ -1,9 +1,9 @@
 import React from 'react';
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from '@material-ui/core/styles';
-import {dataActions} from "../state/data";
+import {dataActions, dataSelectors} from "../state/data";
 import {store} from "../state";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const DatePicker = ({label, setDate, selector}) => {
+const DatePicker = ({label, dateValue, selector}) => {
     const dispatch = useDispatch();
 
     const classes = useStyles();
@@ -26,7 +26,7 @@ const DatePicker = ({label, setDate, selector}) => {
                 id="datetime-local"
                 label={label}
                 type="datetime-local"
-                defaultValue={Date.now}
+                defaultValue={dateValue}
                 className={classes.textField}
                 onChange={async (event)=> {
                     if(selector === "start"){
